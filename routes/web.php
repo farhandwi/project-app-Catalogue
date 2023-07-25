@@ -16,8 +16,9 @@ use App\Http\Controllers\AuthController;
 |
 */
 
-Route::get('/', [CooperationController::class, 'index']);
+Route::get('/', [CooperationController::class, 'index'])  ;
 Route::get('/detail/{cooperation:name}', [CooperationController::class, 'show']);
-Route::get('/login', [AuthController::class, 'login']);
+Route::get('/login', [AuthController::class, 'login'])->name('login')->middleware('guest');
+Route::get('/logout', [AuthController::class, 'logout'])->middleware('auth');
 Route::post('/login', [AuthController::class, 'authenticate']);
-Route::get('/dashboard', [CooperationController::class, 'adminaccess']);
+Route::get('/dashboard', [CooperationController::class, 'adminaccess'])->middleware('auth');

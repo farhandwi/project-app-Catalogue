@@ -1,4 +1,5 @@
 @include('layouts.header')
+
   <body>
     <header>
       <nav class="navbar bg-body-tertiary px-5">
@@ -25,19 +26,46 @@
               </li>
             </ul>
           </div>
-          <div class="navbutton">
-            <a href="{{ env('APP_URL') }}{{ $loginstatus ? '/logout' : '/login' }}" type="button" class="btn btn-success rounded-3 fw-bold fs-4 pe-4 ps-4 text-dark me-5 fs-5 {{ $loginstatus ? 'btn-danger' : 'btn-success'}}">{{ $loginstatus ? 'Logout' : 'Login' }}</a>
-          </div>
+
+          @auth
+          
+            <div class="navbutton">
+              <a href="{{ env('APP_URL') }}/logout" type="button" class="btn btn-success rounded-3 fw-bold fs-4 pe-4 ps-4 text-dark me-5 fs-5 btn-danger">Logout</a>
+            </div>
+            
+          @else
+          
+            <div class="navbutton">
+              <a href="{{ env('APP_URL') }}/login" type="button" class="btn btn-success rounded-3 fw-bold fs-4 pe-4 ps-4 text-dark me-5 fs-5 btn-success">Login</a>
+            </div>
+          
+          @endauth
+
         </div>
       </nav>
       <div class="navbar px-5">
         <div class="container-fluid ms-2 me-2">
-          <form action="{{ $loginstatus ? '/dashboard' : '/' }}" class="search">
-            <div class="input-group">
-              <button class="input-group-text bg-primary text-light fw-bold rounded-start-4 ms-4" id="basic-addon1" type="submit">Search</button>
-              <input type="text" name="search" class="form-control rounded-end-4" placeholder="Search our website" aria-p="search" aria-describedby="basic-addon1" value="{{ request('search') }}"/>
-            </div>
-          </form>
+
+          @auth
+          
+            <form action="/dashboard" class="search">
+              <div class="input-group">
+                <button class="input-group-text bg-primary text-light fw-bold rounded-start-4 ms-4" id="basic-addon1" type="submit">Search</button>
+                <input type="text" name="search" class="form-control rounded-end-4" placeholder="Search our website" aria-p="search" aria-describedby="basic-addon1" value="{{ request('search') }}"/>
+              </div>
+            </form>
+            
+          @else
+            
+            <form action="/" class="search">
+              <div class="input-group">
+                <button class="input-group-text bg-primary text-light fw-bold rounded-start-4 ms-4" id="basic-addon1" type="submit">Search</button>
+                <input type="text" name="search" class="form-control rounded-end-4" placeholder="Search our website" aria-p="search" aria-describedby="basic-addon1" value="{{ request('search') }}"/>
+              </div>
+            </form>
+
+          @endauth
+
           <a href="#contactus" type="button" class="btn btn-primary rounded-3 fw-bold me-5">Contact Us</a>
         </div>
       </div>
