@@ -56,7 +56,7 @@ class CooperationController extends Controller
     {
         return view('detail',[
             "cooperation" => $cooperation->load('country', 'industry', 'organizationtype'),
-            "cssfilename" => 'style '
+            "cssfilename" => 'style'
         ]);
 
     }
