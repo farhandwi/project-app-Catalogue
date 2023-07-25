@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Cooperation;
 use App\Http\Requests\StoreCooperationRequest;
-use App\Http\Requests\UpdateCooperationRequest;
+use App\Http\Requests\UpdateCooperationRequest; 
 
 class CooperationController extends Controller
 {
@@ -13,22 +13,11 @@ class CooperationController extends Controller
      */
     public function index() { 
 
-        $cssfilename = "style";
-        $loginStatus = false;
-        $cooperations = Cooperation::with(['country', 'industry', 'organizationtype'])->latest();
-
-        if(request('search')) {
-
-            $cooperations->where('name', 'like', '%' . request('search') . '%');
-            $cooperations->where('name', 'like', '%' . request('search') . '%');
-        
-        }
-
         return view('home', [
 
-            "cooperations" => $cooperations->get(),
-            "cssfilename" => $cssfilename,
-            "loginstatus" => $loginStatus
+            "cooperations" => Cooperation::latest()->name(request(['search']))->paginate(7),
+            "cssfilename" => 'style',
+            "loginstatus" => false
 
         ]);
 
@@ -36,22 +25,11 @@ class CooperationController extends Controller
 
     public function adminaccess() {
 
-        $cssfilename = "style";
-        $loginStatus = true;
-
-        $cooperations = Cooperation::with(['country', 'industry', 'organizationtype'])->latest();;
-
-        if(request('search')) {
-
-            $cooperations->where('name', 'like', '%' . request('search') . '%');
-
-        }
-
         return view('home', [
 
-            "cooperations" => $cooperations->get(),
-            "cssfilename" => $cssfilename,
-            "loginstatus" => $loginStatus
+            "cooperations" => Cooperation::latest()->name(request(['search']))->get(),
+            "cssfilename" => 'style',
+            "loginstatus" => false
 
         ]);
 
@@ -78,12 +56,12 @@ class CooperationController extends Controller
      */
     public function show(Cooperation $cooperation)
     {
-        $cssfilename = "style";
         return view('detail',[
-            "cooperation" => $cooperation,
-            "cssfilename" => $cssfilename,
+            "cooperation" => $cooperation->load('country', 'industry', 'organizationtype'),
+            "cssfilename" => 'style ',
             "loginstatus" => false
         ]);
+
     }
 
     /**

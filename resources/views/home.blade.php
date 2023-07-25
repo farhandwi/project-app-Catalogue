@@ -22,4 +22,8 @@
 
   @endif
 
+  <div class="d-flex justify-content-center mt-5 ">
+    {{ $cooperations->links() }}
+  </div>
+
 @endsection

@@ -10,6 +10,18 @@ class Cooperation extends Model
     use HasFactory;
 
     protected $guarded = ['id'];
+    protected $with = ['country', 'industry', 'organizationtype'];
+
+    public function scopeName($query, array $filters){
+
+
+        $query->when($filters['search'] ?? false, function($query, $search) {
+
+            return $query->where('name', 'like', '%' . $search . '%');
+
+        });
+
+    }
 
     public function country(){
 
