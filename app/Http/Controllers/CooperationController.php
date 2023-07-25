@@ -11,12 +11,48 @@ class CooperationController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index() {
+    public function index() { 
 
         $cssfilename = "style";
+        $loginStatus = false;
+        $cooperations = Cooperation::with(['country', 'industry', 'organizationtype'])->latest();
+
+        if(request('search')) {
+
+            $cooperations->where('name', 'like', '%' . request('search') . '%');
+            $cooperations->where('name', 'like', '%' . request('search') . '%');
+        
+        }
+
         return view('home', [
-            "cooperations" => Cooperation::all(),
-            "cssfilename" => $cssfilename
+
+            "cooperations" => $cooperations->get(),
+            "cssfilename" => $cssfilename,
+            "loginstatus" => $loginStatus
+
+        ]);
+
+    }
+
+    public function adminaccess() {
+
+        $cssfilename = "style";
+        $loginStatus = true;
+
+        $cooperations = Cooperation::with(['country', 'industry', 'organizationtype'])->latest();;
+
+        if(request('search')) {
+
+            $cooperations->where('name', 'like', '%' . request('search') . '%');
+
+        }
+
+        return view('home', [
+
+            "cooperations" => $cooperations->get(),
+            "cssfilename" => $cssfilename,
+            "loginstatus" => $loginStatus
+
         ]);
 
     }
@@ -45,7 +81,8 @@ class CooperationController extends Controller
         $cssfilename = "style";
         return view('detail',[
             "cooperation" => $cooperation,
-            "cssfilename" => $cssfilename
+            "cssfilename" => $cssfilename,
+            "loginstatus" => false
         ]);
     }
 

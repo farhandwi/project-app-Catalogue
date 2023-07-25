@@ -18,9 +18,11 @@ class CooperationFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => fake()->name(),
+            'country_id' => mt_rand(1, 14),
+            'industry_id' => mt_rand(1, 8),
+            'organizationtype_id' => mt_rand(1, 4),
+            'name' => $this->faker->company,
             'cooperation_started_from' => now(),
-            'detail_cooperation' => 'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Maiores, vitae accusamus. Quisquam, incidunt voluptate id sunt quae laboriosam reiciendis temporibus fuga repellat quasi debitis accusamus a porro quas eos ex doloremque rem ad laborum ratione facilis earum, iste exercitationem? Est, quaerat fugiat possimus earum quis alias distinctio placeat fugit, expedita sed, ratione laboriosam neque magnam libero voluptas cum at. Dolorum nesciunt consectetur soluta, nihil fugit maxime reprehenderit deleniti quae assumenda error, beatae quisquam vero tenetur recusandae consequuntur magni laudantium quia impedit voluptate aspernatur. Quibusdam consequuntur modi ipsa non reiciendis ex cumque quod ea eligendi, excepturi sint obcaecati aliquid id magnam.', // password
         ];
     }
 }

@@ -20,3 +20,4 @@ Route::get('/', [CooperationController::class, 'index']);
 Route::get('/detail/{cooperation:name}', [CooperationController::class, 'show']);
 Route::get('/login', [AuthController::class, 'login']);
 Route::post('/login', [AuthController::class, 'authenticate']);
+Route::get('/dashboard', [CooperationController::class, 'adminaccess']);

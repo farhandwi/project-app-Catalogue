@@ -3,9 +3,11 @@
 @section('detail-information')
 <article>
   <h1>{{ $cooperation->name }}</h1>
-  <h5>Bekerja sama sejak {{ date('d F Y', strtotime($cooperation->cooperation_started_from)) }}</h5>
-  <p>
-    {{ $cooperation->detail_cooperation }}
-  </p>
+  <h5>Cooperated since {{ date('d F Y', strtotime($cooperation->cooperation_started_from)) }}</h5>
+  <ul class="list-group">
+    <li class="list-group-item">Organization Type: {{ $cooperation->organizationtype->name }}</li>
+    <li class="list-group-item">Industry Type: {{ $cooperation->industry->name }}</li>
+    <li class="list-group-item">Country: {{ $cooperation->country->name }}</li>
+  </ul>
 </article>
 @endsection

@@ -26,16 +26,16 @@
             </ul>
           </div>
           <div class="navbutton">
-            <a href="{{ env('APP_URL') }}/login" type="button" class="btn btn-success rounded-3 fw-bold fs-4 pe-4 ps-4 text-dark me-5 fs-5">Login</a>
+            <a href="{{ env('APP_URL') }}{{ $loginstatus ? '/logout' : '/login' }}" type="button" class="btn btn-success rounded-3 fw-bold fs-4 pe-4 ps-4 text-dark me-5 fs-5 {{ $loginstatus ? 'btn-danger' : 'btn-success'}}">{{ $loginstatus ? 'Logout' : 'Login' }}</a>
           </div>
         </div>
       </nav>
       <div class="navbar px-5">
         <div class="container-fluid ms-2 me-2">
-          <form class="search">
+          <form action="{{ $loginstatus ? '/dashboard' : '/' }}" class="search">
             <div class="input-group">
-              <button class="input-group-text bg-primary text-light fw-bold rounded-start-4 ms-4" id="basic-addon1">Search</button>
-              <input type="text" class="form-control rounded-end-4" placeholder="Search our website" aria-p="search" aria-describedby="basic-addon1" />
+              <button class="input-group-text bg-primary text-light fw-bold rounded-start-4 ms-4" id="basic-addon1" type="submit">Search</button>
+              <input type="text" name="search" class="form-control rounded-end-4" placeholder="Search our website" aria-p="search" aria-describedby="basic-addon1" value="{{ request('search') }}"/>
             </div>
           </form>
           <a href="#contactus" type="button" class="btn btn-primary rounded-3 fw-bold me-5">Contact Us</a>

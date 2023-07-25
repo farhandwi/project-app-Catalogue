@@ -7,15 +7,17 @@ use Illuminate\Support\Facades\Schema;
 return new class extends Migration
 {
     /**
-     * Run the migrations.
+     * Run the migrations
      */
     public function up(): void
     {
         Schema::create('cooperations', function (Blueprint $table) {
             $table->increments('id')->unique();
+            $table->foreignId('country_id');
+            $table->foreignId('industry_id');
+            $table->foreignId('organizationtype_id');
             $table->string('name');
             $table->date('cooperation_started_from');
-            $table->text('detail_cooperation')->nullable();
             $table->timestamps();
         });
     }
