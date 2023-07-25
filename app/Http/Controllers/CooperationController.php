@@ -16,8 +16,7 @@ class CooperationController extends Controller
         return view('home', [
 
             "cooperations" => Cooperation::latest()->name(request(['search']))->paginate(7)->withQueryString(),
-            "cssfilename" => 'style',
-            "loginstatus" => false
+            "cssfilename" => 'style'
 
         ]);
 
@@ -28,8 +27,7 @@ class CooperationController extends Controller
         return view('home', [
 
             "cooperations" => Cooperation::latest()->name(request(['search']))->paginate(7)->withQueryString(),
-            "cssfilename" => 'style',
-            "loginstatus" => false
+            "cssfilename" => 'style'
 
         ]);
 
@@ -58,8 +56,7 @@ class CooperationController extends Controller
     {
         return view('detail',[
             "cooperation" => $cooperation->load('country', 'industry', 'organizationtype'),
-            "cssfilename" => 'style ',
-            "loginstatus" => false
+            "cssfilename" => 'style '
         ]);
 
     }
