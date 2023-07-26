@@ -4,6 +4,14 @@
 
   @auth
 
+    @if(session()->has('success'))
+    
+      <div class="alert alert-success" role="alert">
+        {{ session('success') }}
+      </div>
+
+    @endif
+    
     <a href="{{ env('APP_URL') }}/dashboard/cooperations/create" class="btn btn-primary mb-4 ">Add new cooperation</a>
 
   @endauth

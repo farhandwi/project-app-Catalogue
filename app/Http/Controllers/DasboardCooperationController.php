@@ -16,7 +16,7 @@ class DasboardCooperationController extends Controller
     {
         return view('home', [
 
-            "cooperations" => Cooperation::latest()->name(request(['search']))->paginate(6)->withQueryString(),
+            "cooperations" => Cooperation::latest()->name(request(['search']))->paginate(5)->withQueryString(),
             "cssfilename" => 'style'
 
         ]);
