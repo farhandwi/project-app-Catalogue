@@ -1,0 +1,89 @@
+<?php
+
+namespace App\Http\Controllers;
+use App\Models\Country;
+use App\Models\Industry;
+use App\Models\OrganizationType;
+use App\Models\Cooperation;
+use Illuminate\Http\Request;
+
+class DasboardCooperationController extends Controller
+{
+    /**
+     * Display a listing of the resource.
+     */
+    public function index()
+    {
+        return view('home', [
+
+            "cooperations" => Cooperation::latest()->name(request(['search']))->paginate(6)->withQueryString(),
+            "cssfilename" => 'style'
+
+        ]);
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     */
+    public function create()
+    {
+        return view('create', [
+            "cssfilename" => 'style',
+            "title" => "Add New Corporation",
+            "countries" => Country::all(),
+            "industries" => Industry::all(),
+            "organization" => OrganizationType::all()
+        ]);
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     */
+    public function store(Request $request)
+    {
+        $validatedData = $request->validate([
+            'name' => 'required|max:40',
+            'country_id' => 'required',
+            'organizationtype_id' => 'required',
+            'industry_id' => 'required'
+        ]);
+
+        $validatedData['cooperation_started_from'] = date("Y-m-d");
+
+        Cooperation::create($validatedData);
+        return redirect('/dashboard/cooperations')->with('success', 'New Cooperated Company has been added!');
+        
+    }
+
+    /**
+     * Display the specified resource.
+     */
+    public function show(Cooperation $cooperation)
+    {
+        //
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function edit(Cooperation $cooperation)
+    {
+        //
+    }
+
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(Request $request, Cooperation $cooperation)
+    {
+        //
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function destroy(Cooperation $cooperation)
+    {
+        //
+    }
+}

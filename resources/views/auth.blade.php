@@ -10,8 +10,18 @@
             <div class="formContent">
               <form action="" method="post">
                 @csrf
-                <input type="text" class="rounded-3 formStyle" placeholder="Username" name="username" autofocus required />
-                <input type="password" placeholder="Password" name="password" class="rounded-3 formStyle" autofocus required/>
+                <input type="text" class="rounded-3 formStyle @error('username') is-invalid @enderror" placeholder="Username" name="username" autofocus />
+                @error('username') 
+                  <div class="invalid-feedback">
+                    {{ $message }}
+                  </div>
+                @enderror
+                <input type="password" placeholder="Password" name="password" class="rounded-3 formStyle @error('password') is-invalid @enderror" autofocus/>
+                @error('password') 
+                  <div class="invalid-feedback">
+                    {{ $message }}
+                  </div>
+                @enderror
                 <button type="submit" class="rounded-pill buttonStyle">Submit</button>
               </form>
             </div>

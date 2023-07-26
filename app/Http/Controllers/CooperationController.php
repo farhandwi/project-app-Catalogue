@@ -3,7 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Cooperation;
+use App\Models\Country;
+use App\Models\Industry;
+use App\Models\OrganizationType;
 use App\Http\Requests\StoreCooperationRequest;
+use Illuminate\Http\Request;
 use App\Http\Requests\UpdateCooperationRequest; 
 
 class CooperationController extends Controller
@@ -22,29 +26,18 @@ class CooperationController extends Controller
 
     }
 
-    public function adminaccess() {
-
-        return view('home', [
-
-            "cooperations" => Cooperation::latest()->name(request(['search']))->paginate(7)->withQueryString(),
-            "cssfilename" => 'style'
-
-        ]);
-
-    }
-
     /**
      * Show the form for creating a new resource.
      */
     public function create()
     {
-        //
+        
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreCooperationRequest $request)
+    public function store(Request $request)
     {
         //
     }

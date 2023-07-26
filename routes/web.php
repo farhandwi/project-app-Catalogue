@@ -4,6 +4,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CooperationController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\DasboardCooperationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,9 +17,9 @@ use App\Http\Controllers\AuthController;
 |
 */
 
-Route::get('/', [CooperationController::class, 'index'])  ;
+Route::get('/', [CooperationController::class, 'index'])->middleware('guest');
 Route::get('/detail/{cooperation:name}', [CooperationController::class, 'show']);
-Route::get('/login', [AuthController::class, 'login'])->name('login')->middleware('guest');
 Route::get('/logout', [AuthController::class, 'logout'])->middleware('auth');
+Route::get('/login', [AuthController::class, 'login'])->name('login')->middleware('guest');
 Route::post('/login', [AuthController::class, 'authenticate']);
-Route::get('/dashboard', [CooperationController::class, 'adminaccess'])->middleware('auth');
+Route::resource('/dashboard/cooperations', DasboardCooperationController::class)->middleware('auth');

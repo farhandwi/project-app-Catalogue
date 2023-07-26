@@ -5,12 +5,12 @@
       <nav class="navbar bg-body-tertiary px-5">
         <div class="container-fluid d-flex">
           <div class="logo ms-2">
-            <img src="../img/logo.png" alt="Logo" width="300" height="70" class="d-inline-block align-text-top" />
+            <img src="{{ env('APP_URL') }}/img/logo.png" alt="Logo" width="300" height="70" class="d-inline-block align-text-top" />
           </div>
           <div class="navlist d-flex justify-content-evenly">
             <ul class="nav">
               <li class="nav-item">
-                <a class="nav-link active fs-4" aria-current="page" href="{{ env('APP_URL') }}">Home</a>
+                <a class="nav-link fs-4 {{ Request::is('dashboard/cooperations') ? 'active' : '' }} {{ Request::is('/') ? 'active' : '' }}" aria-current="page" href="{{ env('APP_URL') }}">Home</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link fs-4" href="#">Pages</a>
@@ -48,16 +48,22 @@
 
           @auth
           
-            <form action="/dashboard" class="search">
-              <div class="input-group">
-                <button class="input-group-text bg-primary text-light fw-bold rounded-start-4 ms-4" id="basic-addon1" type="submit">Search</button>
-                <input type="text" name="search" class="form-control rounded-end-4" placeholder="Search our website" aria-p="search" aria-describedby="basic-addon1" value="{{ request('search') }}"/>
-              </div>
-            </form>
+            @if (!Request::is('dashboard/cooperations/create'))
+            
+              <form action="{{ env('APP_URL') }}/dashboard/cooperations" class="search">
+                <div class="input-group">
+                  <button class="input-group-text bg-primary text-light fw-bold rounded-start-4 ms-4" id="basic-addon1" type="submit">Search</button>
+                  <input type="text" name="search" class="form-control rounded-end-4" placeholder="Search our website" aria-p="search" aria-describedby="basic-addon1" value="{{ request('search') }}"/>
+                </div>
+              </form>
+
+              <a href="#contactus" type="button" class="btn btn-primary rounded-3 fw-bold me-5">Contact Us</a>
+
+            @endif
             
           @else
             
-            <form action="/" class="search">
+            <form action="{{ env('APP_URL') }}" class="search">
               <div class="input-group">
                 <button class="input-group-text bg-primary text-light fw-bold rounded-start-4 ms-4" id="basic-addon1" type="submit">Search</button>
                 <input type="text" name="search" class="form-control rounded-end-4" placeholder="Search our website" aria-p="search" aria-describedby="basic-addon1" value="{{ request('search') }}"/>
@@ -66,7 +72,6 @@
 
           @endauth
 
-          <a href="#contactus" type="button" class="btn btn-primary rounded-3 fw-bold me-5">Contact Us</a>
         </div>
       </div>
     </header>

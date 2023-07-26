@@ -10,4 +10,5 @@
     <li class="list-group-item">Country: {{ $cooperation->country->name }}</li>
   </ul>
 </article>
+<a href="{{ env('APP_URL') }}" class="btn btn-primary mt-4">Return to Home</a>
 @endsection
