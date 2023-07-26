@@ -1,13 +1,18 @@
-@include('layouts.navbar')
+@extends('layouts.navbar')
+
+@section('detail-information')
 <div class="container text-center mb-5">
   <h1>{{ $title }}</h1>
 </div>
 <div class="d-flex justify-content-center">
   <div style="width: 800px">
-    <form class="row g-3" method="post" action="{{ env('APP_URL') }}/dashboard/cooperations/">
+    <form class="row g-3" method="post" action="{{ env('APP_URL') }}/dashboard/cooperations/@if(!Request::is('dashboard/cooperations/create')){{ !Request::is('dashboard/cooperations/create') ? $cooperation->id : '' }}@endif">
       @csrf
+      @if(!Request::is('dashboard/cooperations/create'))
+        @method('put')
+      @endif
       <div class="col-md-7">
-        <input type="text" class="form-control @error('name') is-invalid  @enderror" name="name" value="{{ old('name') }}" placeholder="Name">
+        <input type="text" class="form-control @error('name') is-invalid  @enderror" name="name" value="{{Request::is('dashboard/cooperations/create') ? old('name') : $cooperation->name }}" placeholder="Name">
         @error('name')
           <div class="invalid-feedback">
             {{ $message }}
@@ -16,10 +21,10 @@
       </div>
       <div class="col-md-5">
         <select id="inputState" class="form-select @error('country_id') is-invalid  @enderror" name="country_id">
-          <option value="{{ Request::is('dashboard/cooperations/create') ? old('country_id') : '' }}" selected disabled>{{ Request::is('dashboard/cooperations/create') ? 'Country' : '' }}</option>
+          <option value="{{ old('country_id') }}" selected disabled>Country</option>
           @foreach ($countries as $country)
 
-            <option value="{{ $country->id }}">{{ $country->name }}</option>
+            <option value="{{ $country->id }}" @if(!Request::is('dashboard/cooperations/create')) @if($country->id === $cooperation->country_id) selected @endif @endif>{{ $country->name }}</option>
           
           @endforeach
         </select>
@@ -31,10 +36,10 @@
       </div>
       <div class="col-md-6">
         <select id="inputState" class="form-select @error('organizationtype_id') is-invalid  @enderror" name="organizationtype_id">
-          <option value="{{ Request::is('dashboard/cooperations/create') ? old('organizationtype_id') : '' }}" selected disabled>{{ Request::is('dashboard/cooperations/create') ? 'Organization Type' : '' }}</option>
+          <option value="{{ old('organizationtype_id') }}" selected disabled>Organization Type</option>
           @foreach ($organization as $org)
           
-            <option value="{{ $org->id }}">{{ $org->name }}</option>
+            <option value="{{ $org->id }}" @if(!Request::is('dashboard/cooperations/create'))  @if($org->id === $cooperation->organizationtype_id) selected @endif @endif>{{ $org->name }}</option>
           
           @endforeach
         </select>
@@ -49,7 +54,7 @@
           <option value="{{ Request::is('dashboard/cooperations/create') ? old('industry_id') : '' }}" selected disabled>{{ Request::is('dashboard/cooperations/create') ? 'Industry Type' : '' }}</option>
           @foreach ($industries as $industry)
         
-            <option value="{{ $industry->id }}">{{ $industry->name }}</option>
+            <option value="{{ $industry->id }}"@if(!Request::is('dashboard/cooperations/create')) @if($industry->id === $cooperation->industry_id) selected @endif @endif>{{ $industry->name }}</option>
           
           @endforeach
         </select>
@@ -66,3 +71,4 @@
     </form>
   </div>
 </div>
+@endsection

@@ -68,7 +68,14 @@ class DasboardCooperationController extends Controller
      */
     public function edit(Cooperation $cooperation)
     {
-        //
+        return view('create', [
+            'cooperation' => $cooperation,
+            "countries" => Country::all(),
+            "industries" => Industry::all(),
+            "organization" => OrganizationType::all(),
+            "title" => "Update Corporated Company Data",
+            "cssfilename" => "style"
+        ]);
     }
 
     /**
@@ -76,7 +83,15 @@ class DasboardCooperationController extends Controller
      */
     public function update(Request $request, Cooperation $cooperation)
     {
-        //
+        $validatedData = $request->validate([
+            'name' => 'required|max:40',
+            'country_id' => 'required',
+            'organizationtype_id' => 'required',
+            'industry_id' => 'required'
+        ]);
+
+        Cooperation::where('id', $cooperation->id)->update($validatedData);
+        return redirect('/dashboard/cooperations')->with('success', 'Cooperated Company has been updated!');
     }
 
     /**
