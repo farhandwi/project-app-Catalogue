@@ -32,8 +32,12 @@
         @auth
         
           <a href="{{ env('APP_URL') }}/update/{{ $cooperation->name }}" class="btn btn-sm text-light fw-bold bg-success rounded-pill me-3">Update</a href="#">
-          <a href="{{ env('APP_URL') }}/delete/{{ $cooperation->name }}" class="btn btn-sm text-light fw-bold bg-danger rounded-pill me-3">Delete</a href="#">
-        
+          <form action="/dashboard/cooperations/{{ $cooperation->id }}" method="post">
+            @method('delete')
+            @csrf
+            <button class="btn btn-sm text-light fw-bold bg-danger rounded-pill me-3" onclick="return confirm('Are you sure you want to delete cooperation with this company?')">Delete</button>
+          </form>
+    
         @endauth
         <a href="{{ env('APP_URL') }}/detail/{{ $cooperation->name }}" class="btn btn-sm text-light fw-bold bg-primary rounded-pill">More</a href="#">
       </li>

@@ -84,6 +84,7 @@ class DasboardCooperationController extends Controller
      */
     public function destroy(Cooperation $cooperation)
     {
-        //
+        Cooperation::destroy($cooperation->id);
+        return redirect('/dashboard/cooperations')->with('success', 'Cooperated Company has been deleted!');
     }
 }
