@@ -5,6 +5,9 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CooperationController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DasboardCooperationController;
+use App\Http\Controllers\CountryController;
+use App\Http\Controllers\OrganizationTypeController;
+use App\Http\Controllers\IndustryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,3 +26,6 @@ Route::get('/logout', [AuthController::class, 'logout'])->middleware('auth');
 Route::get('/login', [AuthController::class, 'login'])->name('login')->middleware('guest');
 Route::post('/login', [AuthController::class, 'authenticate']);
 Route::resource('/dashboard/cooperations', DasboardCooperationController::class)->middleware('auth');
+Route::resource('/country', CountryController::class)->middleware('auth');
+Route::resource('/organizationtype', OrganizationTypeController::class)->middleware('auth');
+Route::resource('/industrytype', IndustryController::class)->middleware('auth');

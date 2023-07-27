@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Industry;
-use App\Http\Requests\StoreIndustryRequest;
+use Illuminate\Http\Request;
 use App\Http\Requests\UpdateIndustryRequest;
 
 class IndustryController extends Controller
@@ -21,15 +21,24 @@ class IndustryController extends Controller
      */
     public function create()
     {
-        //
+        return view('createcategories', [
+            "cssfilename" => 'style',
+            "url" => "/industrytype",
+            "label" => "Industry Type"
+        ]);
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreIndustryRequest $request)
+    public function store(Request $request)
     {
-        //
+        $validatedData = $request->validate([
+            'name' => 'required|max:25'
+        ]);
+
+        Industry::create($validatedData);
+        return redirect('/dashboard/cooperations')->with('success', 'New Industry Type has been added!');
     }
 
     /**

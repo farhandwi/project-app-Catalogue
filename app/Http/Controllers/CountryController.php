@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Country;
-use App\Http\Requests\StoreCountryRequest;
+use Illuminate\Http\Request;
 use App\Http\Requests\UpdateCountryRequest;
 
 class CountryController extends Controller
@@ -21,15 +21,24 @@ class CountryController extends Controller
      */
     public function create()
     {
-        //
+        return view('createcategories', [
+            "cssfilename" => 'style',
+            "url" => "/country",
+            "label" => "Country"
+        ]);
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreCountryRequest $request)
+    public function store(Request $request)
     {
-        //
+        $validatedData = $request->validate([
+            'name' => 'required|max:25'
+        ]);
+
+        Country::create($validatedData);
+        return redirect('/dashboard/cooperations')->with('success', 'New Country has been added!');
     }
 
     /**

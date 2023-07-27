@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\OrganizationType;
-use App\Http\Requests\StoreOrganizationTypeRequest;
+use Illuminate\Http\Request;
 use App\Http\Requests\UpdateOrganizationTypeRequest;
 
 class OrganizationTypeController extends Controller
@@ -21,15 +21,24 @@ class OrganizationTypeController extends Controller
      */
     public function create()
     {
-        //
+        return view('createcategories', [
+            "cssfilename" => 'style',
+            "url" => "/organizationtype",
+            "label" => "Organization Type"
+        ]);
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreOrganizationTypeRequest $request)
+    public function store(Request $request)
     {
-        //
+        $validatedData = $request->validate([
+            'name' => 'required|max:25'
+        ]);
+
+        OrganizationType::create($validatedData);
+        return redirect('/dashboard/cooperations')->with('success', 'New Organization Type has been added!');
     }
 
     /**
