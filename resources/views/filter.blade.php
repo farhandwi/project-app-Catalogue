@@ -72,10 +72,4 @@
 
   @endif
 
-  <div class="d-flex justify-content-center mt-5 ">
-    @if($cooperations->links() !== null)
-      {{ $cooperations->links() }}
-    @endif
-  </div>
-
 @endsection

@@ -57,19 +57,60 @@
                 </div>
               </form>
 
-              <a href="#contactus" type="button" class="btn btn-primary rounded-3 fw-bold me-5">Contact Us</a>
+              <div class="dropdown">
+                <a class="btn btn-primary dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  Country
+                </a>
+                <ul class="dropdown-menu">
+                  @foreach($countries as $country)
+                  <li>
+                    <a class="dropdown-item" href="{{ env('APP_URL') }}/category/country/{{ $country->name }}">{{ $country->name }}</a>
+                  </li>
+                  @endforeach
+                </ul>
+              </div>
+              
+              <div class="dropdown">
+                <a class="btn btn-primary dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  Organization Type
+                </a>
+                <ul class="dropdown-menu">
+                  @foreach($organizations as $organization)
+                  <li>
+                    <a class="dropdown-item" href="{{ env('APP_URL') }}/category/organizationtype/{{ $organization->name }}">{{ $organization->name }}</a>
+                  </li>
+                  @endforeach
+                </ul>
+              </div>
+              
+              <div class="dropdown">
+                <a class="btn btn-primary dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  Industry Type
+                </a>
+                <ul class="dropdown-menu">
+                  @foreach($industries as $industry)
+                  <li>
+                    <a class="dropdown-item" href="{{ env('APP_URL') }}/category/industrytype/{{ $industry->name }}">{{ $industry->name }}</a>
+                  </li>
+                  @endforeach
+                </ul>
+              </div>
 
+              <a href="#contactus" type="button" class="btn btn-primary rounded-3 fw-bold me-5">Contact Us</a>
+              
             @endif
-            
+              
           @else
-            
+              
             <form action="{{ env('APP_URL') }}" class="search">
               <div class="input-group">
                 <button class="input-group-text bg-primary text-light fw-bold rounded-start-4 ms-4" id="basic-addon1" type="submit">Search</button>
                 <input type="text" name="search" class="form-control rounded-end-4" placeholder="Search our website" aria-p="search" aria-describedby="basic-addon1" value="{{ request('search') }}"/>
               </div>
             </form>
-
+              
+            <a href="#contactus" type="button" class="btn btn-primary rounded-3 fw-bold me-5">Contact Us</a>
+          
           @endauth
 
         </div>

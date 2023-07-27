@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\OrganizationType;
+use App\Models\Country;
+use App\Models\Industry;
 use Illuminate\Http\Request;
 use App\Http\Requests\UpdateOrganizationTypeRequest;
 
@@ -24,7 +26,10 @@ class OrganizationTypeController extends Controller
         return view('createcategories', [
             "cssfilename" => 'style',
             "url" => "/organizationtype",
-            "label" => "Organization Type"
+            "label" => "Organization Type",
+            "countries" => Country::all(),
+            "industries" => Industry::all(),
+            "organizations" => OrganizationType::all()
         ]);
     }
 
@@ -44,9 +49,17 @@ class OrganizationTypeController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(OrganizationType $organizationType)
+    public function show(OrganizationType $organizationtype)
     {
-        //
+        $cooperations = $organizationtype->cooperation;
+
+        return view('filter', [
+            "cooperations" => $cooperations,
+            "cssfilename" => 'style',
+            "countries" => Country::all(),
+            "industries" => Industry::all(),
+            "organizations" => OrganizationType::all()
+        ]);
     }
 
     /**

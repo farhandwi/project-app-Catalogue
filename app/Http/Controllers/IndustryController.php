@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Industry;
+use App\Models\Country;
+use App\Models\OrganizationType;
 use Illuminate\Http\Request;
 use App\Http\Requests\UpdateIndustryRequest;
 
@@ -24,7 +26,10 @@ class IndustryController extends Controller
         return view('createcategories', [
             "cssfilename" => 'style',
             "url" => "/industrytype",
-            "label" => "Industry Type"
+            "label" => "Industry Type",
+            "countries" => Country::all(),
+            "industries" => Industry::all(),
+            "organizations" => OrganizationType::all()
         ]);
     }
 
@@ -46,7 +51,15 @@ class IndustryController extends Controller
      */
     public function show(Industry $industry)
     {
-        //
+        $cooperations = $industry->cooperation;
+
+        return view('filter', [
+            "cooperations" => $cooperations,
+            "cssfilename" => 'style',
+            "countries" => Country::all(),
+            "industries" => Industry::all(),
+            "organizations" => OrganizationType::all()
+        ]);
     }
 
     /**

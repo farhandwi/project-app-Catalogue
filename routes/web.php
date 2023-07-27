@@ -8,6 +8,7 @@ use App\Http\Controllers\DasboardCooperationController;
 use App\Http\Controllers\CountryController;
 use App\Http\Controllers\OrganizationTypeController;
 use App\Http\Controllers\IndustryController;
+use App\Policies\OrganizationTypePolicy;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,6 +23,9 @@ use App\Http\Controllers\IndustryController;
 
 Route::get('/', [CooperationController::class, 'index'])->middleware('guest');
 Route::get('/detail/{cooperation:name}', [CooperationController::class, 'show']);
+Route::get('/category/country/{country:name}', [CountryController::class, 'show']);
+Route::get('/category/organizationtype/{organizationtype:name}', [OrganizationTypeController::class, 'show']);
+Route::get('/category/industrytype/{industry:name}', [IndustryController::class, 'show']);
 Route::get('/logout', [AuthController::class, 'logout'])->middleware('auth');
 Route::get('/login', [AuthController::class, 'login'])->name('login')->middleware('guest');
 Route::post('/login', [AuthController::class, 'authenticate']);

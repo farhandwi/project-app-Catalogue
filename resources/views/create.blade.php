@@ -37,11 +37,11 @@
         @enderror
       </div>
       <div class="col-md-6 form-floating">
-        <select id="inputState1" class="form-select @error('organizationtype_id') is-invalid  @enderror" name="organizationtype_id">
-          <option value="{{ old('organizationtype_id') }}" selected disabled>Choose your Option</option>
+        <select id="inputState1" class="form-select @error('organization_type_id') is-invalid  @enderror" name="organization_type_id">
+          <option value="{{ old('organization_type_id') }}" selected disabled>Choose your Option</option>
           @foreach ($organization as $org)
           
-            <option value="{{ $org->id }}" @if(!Request::is('dashboard/cooperations/create'))  @if($org->id === $cooperation->organizationtype_id) selected @endif @endif>{{ $org->name }}</option>
+            <option value="{{ $org->id }}" @if(!Request::is('dashboard/cooperations/create'))  @if($org->id === $cooperation->organization_type_id) selected @endif @endif>{{ $org->name }}</option>
           
           @endforeach
         </select>

@@ -17,7 +17,10 @@ class DasboardCooperationController extends Controller
         return view('home', [
 
             "cooperations" => Cooperation::latest()->name(request(['search']))->paginate(5)->withQueryString(),
-            "cssfilename" => 'style'
+            "cssfilename" => 'style',
+            "countries" => Country::all(),
+            "industries" => Industry::all(),
+            "organizations" => OrganizationType::all()
 
         ]);
     }
@@ -44,7 +47,7 @@ class DasboardCooperationController extends Controller
         $validatedData = $request->validate([
             'name' => 'required|max:40',
             'country_id' => 'required',
-            'organizationtype_id' => 'required',
+            'organization_type_id' => 'required',
             'industry_id' => 'required',
             'description' => 'required|max:255'
         ]);
@@ -56,13 +59,6 @@ class DasboardCooperationController extends Controller
         
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Cooperation $cooperation)
-    {
-        //
-    }
 
     /**
      * Show the form for editing the specified resource.
@@ -87,7 +83,7 @@ class DasboardCooperationController extends Controller
         $validatedData = $request->validate([
             'name' => 'required|max:40',
             'country_id' => 'required',
-            'organizationtype_id' => 'required',
+            'organization_type_id' => 'required',
             'industry_id' => 'required',
             'description' => 'required|max:255'
         ]);

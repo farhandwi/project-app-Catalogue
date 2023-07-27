@@ -3,8 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Country;
+use App\Models\Industry;
+use App\Models\OrganizationType;
 use Illuminate\Http\Request;
 use App\Http\Requests\UpdateCountryRequest;
+use App\Models\Cooperation;
 
 class CountryController extends Controller
 {
@@ -24,7 +27,10 @@ class CountryController extends Controller
         return view('createcategories', [
             "cssfilename" => 'style',
             "url" => "/country",
-            "label" => "Country"
+            "label" => "Country",
+            "countries" => Country::all(),
+            "industries" => Industry::all(),
+            "organizations" => OrganizationType::all()
         ]);
     }
 
@@ -46,7 +52,15 @@ class CountryController extends Controller
      */
     public function show(Country $country)
     {
-        //
+        $cooperations = $country->cooperation;
+
+        return view('filter', [
+            "cooperations" => $cooperations,
+            "cssfilename" => 'style',
+            "countries" => Country::all(),
+            "industries" => Industry::all(),
+            "organizations" => OrganizationType::all()
+        ]);
     }
 
     /**

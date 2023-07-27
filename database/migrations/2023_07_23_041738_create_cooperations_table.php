@@ -15,7 +15,7 @@ return new class extends Migration
             $table->increments('id')->unique();
             $table->foreignId('country_id');
             $table->foreignId('industry_id');
-            $table->foreignId('organizationtype_id');
+            $table->foreignId('organization_type_id');
             $table->string('name');
             $table->string('description');
             $table->date('cooperation_started_from');
