@@ -6,58 +6,62 @@
 </div>
 <div class="d-flex justify-content-center">
   <div style="width: 800px">
-    <form class="row g-3" method="post" action="{{ env('APP_URL') }}/dashboard/cooperations/@if(!Request::is('dashboard/cooperations/create')){{ !Request::is('dashboard/cooperations/create') ? $cooperation->id : '' }}@endif">
+    <form class="row g-3 form-floating" method="post" action="{{ env('APP_URL') }}/dashboard/cooperations/@if(!Request::is('dashboard/cooperations/create')){{ !Request::is('dashboard/cooperations/create') ? $cooperation->id : '' }}@endif">
       @csrf
       @if(!Request::is('dashboard/cooperations/create'))
         @method('put')
       @endif
-      <div class="col-md-7">
-        <input type="text" class="form-control @error('name') is-invalid  @enderror" name="name" value="{{Request::is('dashboard/cooperations/create') ? old('name') : $cooperation->name }}" placeholder="Name">
+      <div class="col-md-7 form-floating">
+        <input id="name" type="text" class="form-control @error('name') is-invalid  @enderror" name="name" value="{{Request::is('dashboard/cooperations/create') ? old('name') : $cooperation->name }}">
+        <label for="name">Name</label>
         @error('name')
           <div class="invalid-feedback">
             {{ $message }}
           </div>
         @enderror
       </div>
-      <div class="col-md-5">
+      <div class="col-md-5 form-floating">
         <select id="inputState" class="form-select @error('country_id') is-invalid  @enderror" name="country_id">
-          <option value="{{ old('country_id') }}" selected disabled>Country</option>
+          <option value="{{ old('country_id') }}" selected disabled>Choose your Option</option>
           @foreach ($countries as $country)
 
             <option value="{{ $country->id }}" @if(!Request::is('dashboard/cooperations/create')) @if($country->id === $cooperation->country_id) selected @endif @endif>{{ $country->name }}</option>
           
           @endforeach
         </select>
+        <label for="inputState">Country</label>
         @error('country_id')
           <div class="invalid-feedback">
             {{ $message }}
           </div>
         @enderror
       </div>
-      <div class="col-md-6">
-        <select id="inputState" class="form-select @error('organizationtype_id') is-invalid  @enderror" name="organizationtype_id">
-          <option value="{{ old('organizationtype_id') }}" selected disabled>Organization Type</option>
+      <div class="col-md-6 form-floating">
+        <select id="inputState1" class="form-select @error('organizationtype_id') is-invalid  @enderror" name="organizationtype_id">
+          <option value="{{ old('organizationtype_id') }}" selected disabled>Choose your Option</option>
           @foreach ($organization as $org)
           
             <option value="{{ $org->id }}" @if(!Request::is('dashboard/cooperations/create'))  @if($org->id === $cooperation->organizationtype_id) selected @endif @endif>{{ $org->name }}</option>
           
           @endforeach
         </select>
+        <label for="inputState1">Organization</label>
         @error('organizationtype_id')
           <div class="invalid-feedback">
             {{ $message }}
           </div>
         @enderror
       </div>
-      <div class="col-md-6">
-        <select id="inputState" class="form-select @error('industry_id') is-invalid  @enderror" name="industry_id">
-          <option value="{{ Request::is('dashboard/cooperations/create') ? old('industry_id') : '' }}" selected disabled>{{ Request::is('dashboard/cooperations/create') ? 'Industry Type' : '' }}</option>
+      <div class="col-md-6 form-floating">
+        <select id="inputState2" class="form-select @error('industry_id') is-invalid  @enderror" name="industry_id">
+          <option value="{{ old('industry_id') }}" selected disabled>Choose your Option</option>
           @foreach ($industries as $industry)
         
             <option value="{{ $industry->id }}"@if(!Request::is('dashboard/cooperations/create')) @if($industry->id === $cooperation->industry_id) selected @endif @endif>{{ $industry->name }}</option>
           
           @endforeach
         </select>
+        <label for="inputState2">Industry Type</label>
         @error('industry_id')
           <div class="invalid-feedback">
             {{ $message }}
