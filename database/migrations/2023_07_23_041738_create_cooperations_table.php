@@ -17,6 +17,7 @@ return new class extends Migration
             $table->foreignId('industry_id');
             $table->foreignId('organizationtype_id');
             $table->string('name');
+            $table->string('description');
             $table->date('cooperation_started_from');
             $table->timestamps();
         });

@@ -45,7 +45,8 @@ class DasboardCooperationController extends Controller
             'name' => 'required|max:40',
             'country_id' => 'required',
             'organizationtype_id' => 'required',
-            'industry_id' => 'required'
+            'industry_id' => 'required',
+            'description' => 'required|max:255'
         ]);
 
         $validatedData['cooperation_started_from'] = date("Y-m-d");
@@ -87,7 +88,8 @@ class DasboardCooperationController extends Controller
             'name' => 'required|max:40',
             'country_id' => 'required',
             'organizationtype_id' => 'required',
-            'industry_id' => 'required'
+            'industry_id' => 'required',
+            'description' => 'required|max:255'
         ]);
 
         Cooperation::where('id', $cooperation->id)->update($validatedData);

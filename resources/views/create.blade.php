@@ -64,6 +64,17 @@
           </div>
         @enderror
       </div>
+      <div class="col-md-12">
+        <label for="description" class="mb-2">Add Company Description</label>
+        <textarea class="form-control @error('name') is-invalid  @enderror" id="description" rows="5" placeholder="Add Description" name="description" value="fad">
+          {{Request::is('dashboard/cooperations/create') ? old('description') : $cooperation->description }}
+        </textarea>
+        @error('description')
+          <div class="invalid-feedback">
+            {{ $message }}
+          </div>
+        @enderror
+      </div>
       <div class="col-12 d-flex justify-content-between ">
         <a href="{{ env('APP_URL') }}/dashboard/cooperations" class="btn btn-danger">Return to home</a>
         <button type="submit" class="btn btn-success">Add Company</button>

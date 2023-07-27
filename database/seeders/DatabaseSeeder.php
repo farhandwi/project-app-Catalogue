@@ -13,15 +13,15 @@ class DatabaseSeeder extends Seeder {
 
   public function run(){
 
-    User::create([
-      'username' => 'Admin',
-      'password' => bcrypt('adminpassword')
-    ]);
+    // User::create([
+    //   'username' => 'Admin',
+    //   'password' => bcrypt('adminpassword')
+    // ]);
 
-    Cooperation::factory(20)->create();
-    Country::factory(14)->create();
-    Industry::factory(8)->create();
-    OrganizationType::factory(4)->create();
+    // Cooperation::factory(20)->create();
+    // Country::factory(14)->create();
+    // Industry::factory(8)->create();
+    // OrganizationType::factory(4)->create();
 
     // Cooperation::create([
     //   'name' => 'Pertamina',
