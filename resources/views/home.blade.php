@@ -12,28 +12,24 @@
 
     @endif
 
-    <button type="button" class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-      Add Data
-    </button>
-
-    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h1 class="modal-title fs-5" id="staticBackdropLabel">Add Data</h1>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-          <div class="modal-body">
-            <a href="{{ env('APP_URL') }}/dashboard/cooperations/create" class="btn btn-primary mb-4 ">Add new cooperation</a>
-            <a href="{{ env('APP_URL') }}/country/create" class="btn btn-primary mb-4">Add new country</a>            
-            <a href="{{ env('APP_URL') }}/organizationtype/create" class="btn btn-primary mb-4 ">Add new organization type</a>
-            <a href="{{ env('APP_URL') }}/industrytype/create" class="btn btn-primary mb-4 ">Add new industry type</a>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          </div>
-        </div>
-      </div>
+    <div class="dropdown mb-3">
+      <button type="button" class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+        Add Data
+      </button>
+      <ul class="dropdown-menu">
+        <li>
+          <a href="{{ env('APP_URL') }}/dashboard/cooperations/create" class="btn btn-primary mb-4 dropdown-item">Add new cooperation</a>
+        </li>
+        <li>
+          <a href="{{ env('APP_URL') }}/country/create" class="btn btn-primary mb-4 dropdown-item">Add new country</a>
+        </li>
+        <li>
+          <a href="{{ env('APP_URL') }}/organizationtype/create" class="btn btn-primary mb-4 dropdown-item">Add new organization type</a>
+        </li>
+        <li>
+          <a href="{{ env('APP_URL') }}/industrytype/create" class="btn btn-primary mb-4 dropdown-item">Add new industry type</a>
+        </li>
+      </ul>
     </div>
 
   @endauth

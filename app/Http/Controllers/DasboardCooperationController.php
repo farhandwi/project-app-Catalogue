@@ -35,7 +35,7 @@ class DasboardCooperationController extends Controller
             "title" => "Add New Corporation",
             "countries" => Country::all(),
             "industries" => Industry::all(),
-            "organization" => OrganizationType::all()
+            "organizations" => OrganizationType::all()
         ]);
     }
 
