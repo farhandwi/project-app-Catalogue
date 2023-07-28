@@ -1,10 +1,8 @@
-$(".confirmDelete").on("click", function (e) {
-    e.preventDefault();
-    var formElement = $(this).closest("form");
-    var actionValue = formElement.attr("action");
-    console.log(actionValue);
+function konfirmasi() {
+    let formElement = $(this).closest("form");
+    let actionValue = formElement.attr("action");
     const href = $(this).attr("href");
-    Swal.fire({
+    return Swal.fire({
         title: "Are you sure?",
         text: "You can't see the company that have been you deleted!",
         icon: "warning",
@@ -14,7 +12,7 @@ $(".confirmDelete").on("click", function (e) {
         confirmButtonText: "Yes, delete it!",
     }).then((result) => {
         if (result.isConfirmed) {
-            document.getElementById("formdelete").submit();
+            return true;
         }
     });
-});
+}

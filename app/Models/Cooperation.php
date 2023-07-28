@@ -4,13 +4,16 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\OrganizationType;
+use App\Models\Industry;
+use App\Models\Country;
 
 class Cooperation extends Model
 {
     use HasFactory;
 
     protected $guarded = ['id'];
-    protected $with = ['country', 'industry', 'organizationtype'];
+    protected $with = ['country', 'industry', 'organization_type'];
 
     public function scopeName($query, array $filters){
 
@@ -35,7 +38,7 @@ class Cooperation extends Model
 
     }
     
-    public function organizationtype(){
+    public function organization_type(){
 
         return $this->belongsTo(OrganizationType::class);
 

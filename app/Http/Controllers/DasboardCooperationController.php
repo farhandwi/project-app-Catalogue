@@ -69,7 +69,7 @@ class DasboardCooperationController extends Controller
             'cooperation' => $cooperation,
             "countries" => Country::all(),
             "industries" => Industry::all(),
-            "organization" => OrganizationType::all(),
+            "organizations" => OrganizationType::all(),
             "title" => "Update Corporated Company Data",
             "cssfilename" => "style"
         ]);

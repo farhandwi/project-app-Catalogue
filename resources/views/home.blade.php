@@ -50,10 +50,10 @@
         @auth
         
           <a href="{{ env('APP_URL') }}/dashboard/cooperations/{{ $cooperation->id }}/edit" class="btn btn-sm text-light fw-bold bg-success rounded-pill me-3">Update</a href="#">
-          <form id="formdelete" action="{{ env('APP_URL') }}/dashboard/cooperations/{{ $cooperation->id }}" method="post">
+          <form action="{{ env('APP_URL') }}/dashboard/cooperations/{{ $cooperation->id }}" method="post">
             @method('delete')
             @csrf
-            <button class="btn btn-sm text-light fw-bold bg-danger rounded-pill me-3 confirmDelete">Delete</button>
+            <button class="btn btn-sm text-light fw-bold bg-danger rounded-pill me-3" onclick="return konfirmasi()">Delete</button>
           </form>
     
         @endauth

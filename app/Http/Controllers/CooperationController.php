@@ -51,7 +51,7 @@ class CooperationController extends Controller
     public function show(Cooperation $cooperation)
     {
         return view('detail',[
-            "cooperation" => $cooperation->load('country', 'industry', 'organizationtype'),
+            "cooperation" => $cooperation,
             "cssfilename" => 'style',
             "countries" => Country::all(),
             "industries" => Industry::all(),
